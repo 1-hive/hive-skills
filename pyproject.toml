@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hiveskills"
+version = "1.0.0"
+description = "One Hive R4: a skill registry with content-hashed, expiring entries, and a loader that refuses duplicates and conflicts"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [{ name = "One Hive" }]
+keywords = ["agent-skills", "SKILL.md", "registry", "provenance", "content-addressing"]
+dependencies = [
+    "hivepin>=2.0.0",
+    "pyyaml>=6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+hive-skill = "hiveskills.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/1-hive/hive-skills"
+Specification = "https://github.com/1-hive/hive-skills/blob/main/SPEC.md"
+
+[tool.uv.sources]
+hivepin = { git = "https://github.com/1-hive/hive-pin", tag = "v2.0.0" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hiveskills"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
